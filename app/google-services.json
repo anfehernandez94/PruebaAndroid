@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "889986697014",
+    "firebase_url": "https://prueba-android-23b51.firebaseio.com",
+    "project_id": "prueba-android-23b51",
+    "storage_bucket": "prueba-android-23b51.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:889986697014:android:ad6fdd914f08d83a",
+        "android_client_info": {
+          "package_name": "andres.com.pruebaandroid"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "889986697014-i1e8780ojifrg78n1t5831ifl0vl293p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCHK0PHYVjoqlH-7uQxvrwnV0rbX4PLzk0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
