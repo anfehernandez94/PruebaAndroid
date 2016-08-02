@@ -7,4 +7,6 @@
     <string name="descripcion_app_logo">Logo de la app</string>
     <string name="app_sin_nombre">App sin nombre</string>
     <string name="sin_app">No hay apps</string>
+
+    <string name="favor_espere">Favor espere...</string>
 </resources>

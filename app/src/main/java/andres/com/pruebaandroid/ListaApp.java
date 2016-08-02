@@ -1,10 +1,12 @@
 package andres.com.pruebaandroid;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,10 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 import java.io.File;
 import java.io.IOException;
@@ -25,26 +31,24 @@ import clases.App;
 
 public class ListaApp extends BaseAdapter {
 
-
     private Context context;
     private ArrayList apps;
     private LayoutInflater inflater=null;
-    private View view;
-    private Holder holder;
+    ImageLoader imageLoader;
+    ViewHolder holder;
 
     public ListaApp(Context mainActivity, ArrayList arrayList) {
-        context=mainActivity;
-        this.apps=arrayList;
+        context = mainActivity;
+        this.apps = arrayList;
         this.inflater = LayoutInflater.from(context);
-        holder=new Holder();
+        imageLoader = ImageLoader.getInstance();
+        DisplayImageOptions opts = new DisplayImageOptions.Builder().cacheInMemory(true).cacheOnDisc(true).build();
+        ImageLoaderConfiguration configImageLoader = new ImageLoaderConfiguration.Builder(context)
+                .defaultDisplayImageOptions(opts).build();
 
-        inflater = ( LayoutInflater )context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-    }
+        imageLoader.init(configImageLoader);
 
-    private class Holder
-    {
-        TextView tvAppNombre;
-        ImageView ivAppLogo;
+
     }
 
     @Override
@@ -62,102 +66,89 @@ public class ListaApp extends BaseAdapter {
         return 0;
     }
 
-    public static class ViewHolder{
-
-        public TextView tvAppName;
-        public ImageView ivAppLogo;
-
+    private static class ViewHolder{
+        TextView tvAppName;
+        ImageView ivAppLogo;
     }
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
-        ViewHolder holder;
-        App app = null;
-
-        if(convertView==null){
+        if(view == null){
             view = inflater.inflate(R.layout.lista_app, null);
-
             holder = new ViewHolder();
             holder.tvAppName = (TextView) view.findViewById(R.id.tv_app_nombre);
             holder.ivAppLogo=(ImageView) view.findViewById(R.id.iv_app_logo);
             view.setTag( holder );
         }
-        else
-            holder=(ViewHolder)view.getTag();
-
-        if(apps.size() < 1)
-        {
-            holder.tvAppName.setText(R.string.sin_app);
+        else {
+            holder = (ViewHolder) view.getTag();
         }
-        else
-        {
-            app = (App) apps.get( position );
 
-            ConnectivityManager connMgr = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        App app = (App) apps.get( position );
 
-//                return ();
+        holder.tvAppName.setText( app.nombre);
+        Log.d("view", app.nombre);
 
-//            if(networkInfo != null && networkInfo.isConnected()) {
-                URL url = null;
-                try {
-                    url = new URL(app.urlLogo);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
+        ConnectivityManager connMgr = (ConnectivityManager)context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
+//        if(networkInfo != null && networkInfo.isConnected()) {
+            if(holder.ivAppLogo != null){
+                imageLoader.displayImage(app.urlLogo, holder.ivAppLogo);
 //                try {
-//                    if(url != null){
-////                        Bitmap bit = BitmapFactory.decodeStream((InputStream)url.getContent());
-////                        holder.ivAppLogo.setImageBitmap(bit);
-//                    }
-//                } catch (IOException | NullPointerException e) {
+//                    new DownloadImageTask(holder.ivAppLogo).execute(app.urlLogo);
+//                } catch (NullPointerException e) {
 //                    e.printStackTrace();
 //                }
-//            }else{
-//                ImageLoader imageLoader = ImageLoader.getInstance();
-//                File file = imageLoader.getDiscCache().get(app.urlLogo);
-//                holder.ivAppLogo.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
-//            }
-            holder.tvAppName.setText( app.nombre);
-            Log.d("view", app.nombre);
-
-//            holder.ivAppLogo.setImageResource(
-//                    res.getIdentifier(
-//                            "com.androidexample.customlistview:drawable/"+tempValues.getImage()
-//                            ,null,null));
-
-            /******** Set Item Click Listner for LayoutInflater for each row *******/
-
-//            view.setOnClickListener(new OnItemClickListener( position ));
-
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Toast.makeText(context, "Detalles App: "+ position, Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-        return view;
-
-
-//        if(view == null){
-//            view = inflater.inflate(R.layout.lista_app, parent);
-//
+            }
+//        }else{
+//            imageLoader.displayImage(app.urlLogo, holder.ivAppLogo);
+////            File file = imageLoader.getDiscCache().get(app.urlLogo);
+////            holder.ivAppLogo.setImageBitmap(BitmapFactory.decodeFile(file.getAbsolutePath()));
 //        }
-//
-//        holder.tvAppNombre=(TextView) view.findViewById(R.id.tv_client_name);
-//        holder.tvAppNombre.setText(listApp[position]);
-//
-//        holder.ivAppLogo=(ImageView) view.findViewById(R.id.iv_app_logo);
-////        holder.ivClientLogo.setImageResource(imageId[position]);
-//
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context, "Detalles App: "+listApp[position], Toast.LENGTH_LONG).show();
-//            }
-//        });
-//        return view;
+
+
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Detalles App: "+ position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
+    }
+
+    private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
+
+        private ProgressDialog progressDialog;
+        private ImageView ivAppLogo;
+
+        DownloadImageTask(ImageView bmImage) {
+            this.ivAppLogo = bmImage;
+        }
+
+        protected void onPreExecute() {
+//            progressDialog = ProgressDialog.show(context, "Favor espere", "Cargando datos ...", true);
+        }
+
+        protected Bitmap doInBackground(String... urls) {
+            String strUrl = urls[0];
+            Bitmap bitmap = null;
+            try {
+                InputStream in = new java.net.URL(strUrl).openStream();
+                bitmap = BitmapFactory.decodeStream(in);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return bitmap;
+        }
+
+        protected void onPostExecute(Bitmap bitmap) {
+
+            ivAppLogo.setImageBitmap(bitmap);
+//            progressDialog.dismiss();
+        }
     }
 }

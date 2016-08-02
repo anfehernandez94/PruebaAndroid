@@ -58,7 +58,7 @@ public class FragmentListadoCategoriaPort extends Fragment {
             }
         });
 
-        ref.addValueEventListener(new ValueEventListener() {
+        ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
