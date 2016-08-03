@@ -1,7 +1,6 @@
 package andres.com.pruebaandroid;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -20,58 +18,52 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
+import clases.App;
 import clases.Constante;
 
 
-public class FragmentListadoCategoriaPort extends Fragment {
+public class FragmentListadoAppPort extends Fragment {
 
     private View view;
+    String categoria;
 
-    public FragmentListadoCategoriaPort() {}
+    public FragmentListadoAppPort() {}
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if(view == null){
-            view = inflater.inflate(R.layout.fragment_listado_categoria_port, container, false);
+            view = inflater.inflate(R.layout.fragment_listado_app_port, container, false);
         }
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        database.setPersistenceEnabled(true);
         DatabaseReference ref = database.getReference("feed/entry");
 
-
-        final ListView lvAppCategoria = (ListView) view.findViewById(R.id.lv_categoria);
-
-
+        final ListView lvAppCategoria = (ListView) view.findViewById(R.id.lv_app_categoria);
+        lvAppCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Toast.makeText(getActivity(), "Position :"+position+"  ListItem : "  , Toast.LENGTH_LONG).show();
+            }
+        });
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-                ArrayList<String> arrayCategoria = new ArrayList<>();
-
-                lvAppCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        TextView categoriaNombre = (TextView) view.findViewById(R.id.tv_categoria_nombre);
-                        Intent i = new Intent(getActivity(), ActivityListadoApp.class);
-                        i.putExtra("categoria", categoriaNombre.getText());
-                        startActivity(i);
-                    }
-                });
+                ArrayList<App> arrayApp = new ArrayList<>();
 
                 for(DataSnapshot dss: dataSnapshot.getChildren()) {
-                    String categoria = dss.child("category/attributes/label").getValue().toString();
-                    boolean estaRepetido = true;
-                    for(String str : arrayCategoria){
-                        if(str.equals(categoria))
-                            estaRepetido = false;
+                    String categoriaNombre = dss.child("category/attributes/label").getValue().toString();
+                    if(categoriaNombre.equals(categoria)) {
+                        App app = new App();
+                        app.id = dss.child("id/attributes/im:id").getValue().toString();
+                        app.nombre = dss.child("title/label").getValue().toString();
+                        app.urlLogo = dss.child("im:image/0/label").getValue().toString();
+                        arrayApp.add(app);
                     }
-                    if(estaRepetido)
-                        arrayCategoria.add(categoria);
                 }
-                ListaCategoria adapter = new ListaCategoria(getActivity(), arrayCategoria);
+                ListaApp adapter = new ListaApp(getActivity(), arrayApp);
                 lvAppCategoria.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 

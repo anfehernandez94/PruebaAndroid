@@ -2,14 +2,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="andres.com.pruebaandroid.FragmentListadoCategoriaPort">
+    tools:context="andres.com.pruebaandroid.FragmentListadoAppPort">
 
     <ListView
         android:scrollbars="vertical"
-        android:id="@+id/lv_categoria"
+        android:id="@+id/lv_app_categoria"
         android:layout_width="wrap_content"
         android:layout_height="fill_parent"
         android:focusable="true">
     </ListView>
+
 
 </FrameLayout>
