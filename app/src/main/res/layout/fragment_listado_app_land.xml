@@ -1,0 +1,23 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="andres.com.pruebaandroid.FragmentListadoAppPort">
+
+    <GridView
+        android:scrollbars="horizontal"
+        android:id="@+id/gv_app_categoria"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:focusable="true"
+        android:numColumns="3"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:verticalSpacing="5dp"
+        android:horizontalSpacing="5dp">
+    </GridView>
+
+
+</FrameLayout>

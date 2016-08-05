@@ -5,7 +5,7 @@
     android:padding="6dip" >
 
     <TextView
-        android:id="@+id/tv_categoria_nombre"
+        android:id="@+id/tv_categoria_nombre_lista"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"

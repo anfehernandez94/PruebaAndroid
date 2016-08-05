@@ -2,7 +2,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="andres.com.pruebaandroid.FragmentListadoCategoriaPort">
+    tools:context="andres.com.pruebaandroid.FragmentListadoCategoriaPort"
+    android:background="@color/colorPrimary">
 
     <ListView
         android:scrollbars="vertical"

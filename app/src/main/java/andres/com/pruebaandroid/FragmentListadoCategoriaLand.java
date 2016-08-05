@@ -10,11 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.RuntimeExecutionException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -23,26 +23,24 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-import clases.Constante;
+public class FragmentListadoCategoriaLand extends Fragment {
+
+    View view;
 
 
-public class FragmentListadoCategoriaPort extends Fragment {
-
-    private View view;
-
-    public FragmentListadoCategoriaPort() {}
-
+    public FragmentListadoCategoriaLand() {
+        // Required empty public constructor
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         if(view == null){
-            view = inflater.inflate(R.layout.fragment_listado_categoria_port, container, false);
+            view = inflater.inflate(R.layout.fragment_listado_categoria_land, container, false);
         }
-
         final Activity activity = getActivity();
         if(activity != null)
-            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            activity.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         try{
@@ -52,7 +50,9 @@ public class FragmentListadoCategoriaPort extends Fragment {
         DatabaseReference ref = database.getReference("feed/entry");
 
 
-        final ListView lvAppCategoria = (ListView) view.findViewById(R.id.lv_categoria);
+        final GridView gvAppCategoria = (GridView) view.findViewById(R.id.gv_categoria);
+
+
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -60,10 +60,10 @@ public class FragmentListadoCategoriaPort extends Fragment {
 
                 ArrayList<String> arrayCategoria = new ArrayList<>();
 
-                lvAppCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                gvAppCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                        TextView categoriaNombre = (TextView) view.findViewById(R.id.tv_categoria_nombre_lista);
+                        TextView categoriaNombre = (TextView) view.findViewById(R.id.tv_categoria_nombre_grid);
                         Intent i = new Intent(getActivity(), ActivityListadoApp.class);
                         i.putExtra("categoria", categoriaNombre.getText());
                         startActivity(i);
@@ -80,8 +80,8 @@ public class FragmentListadoCategoriaPort extends Fragment {
                     if(estaRepetido)
                         arrayCategoria.add(categoria);
                 }
-                ListaCategoria adapter = new ListaCategoria(activity, arrayCategoria);
-                lvAppCategoria.setAdapter(adapter);
+                GridCategoria adapter = new GridCategoria(activity, arrayCategoria);
+                gvAppCategoria.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
 
             }
@@ -94,5 +94,4 @@ public class FragmentListadoCategoriaPort extends Fragment {
 
         return view;
     }
-
 }

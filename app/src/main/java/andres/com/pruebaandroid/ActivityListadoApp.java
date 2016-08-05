@@ -9,19 +9,26 @@ public class ActivityListadoApp extends Activity {
 
     private FragmentManager fragmentManager;
     private FragmentListadoAppPort fragmentListadoAppPort = new FragmentListadoAppPort();
+    private FragmentListadoAppLand fragmentListadoAppLand = new FragmentListadoAppLand();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listado_app);
 
-        String categoria = getIntent().getStringExtra("categoria");
-        fragmentListadoAppPort.categoria = categoria;
-
         fragmentManager = getFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 
-        fragmentTransaction.add(R.id.fragment_listado_app, fragmentListadoAppPort);
+        String categoria = getIntent().getStringExtra("categoria");
+
+        boolean isTablet = getResources().getBoolean(R.bool.isTablet);
+        if(isTablet){
+            fragmentListadoAppLand.categoria = categoria;
+            fragmentTransaction.add(R.id.fragment_listado_app, fragmentListadoAppLand);
+        }else{
+            fragmentListadoAppPort.categoria = categoria;
+            fragmentTransaction.add(R.id.fragment_listado_app, fragmentListadoAppPort);
+        }
 
         fragmentTransaction.commit();
     }

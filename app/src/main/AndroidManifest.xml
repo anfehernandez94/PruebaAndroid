@@ -12,21 +12,26 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <activity
             android:name=".ActivityListadoApp"
-            android:screenOrientation="nosensor">
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ActivityListadoCategoria"
+            android:screenOrientation="nosensor" />
+        <activity
+            android:name=".ActivitySplash"
+            android:screenOrientation="nosensor"
+            android:theme="@style/TemaSplash">
 
-        </activity>
-
-        <activity android:name=".ActivityListadoCategoria">
+            <!-- android:theme="@style/TemaSplash" -->
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".ActivityBase" />
+        <activity android:name=".ActivityApp"></activity>
     </application>
 
 </manifest>

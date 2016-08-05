@@ -12,7 +12,7 @@ public class Constante {
     static FirebaseDatabase database = FirebaseDatabase.getInstance();
     static public DatabaseReference ref = database.getReference("feed/entry");
 
-    Constante(){
+    public Constante(){
         database.setPersistenceEnabled(true);
     }
 

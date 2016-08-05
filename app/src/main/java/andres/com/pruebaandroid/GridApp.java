@@ -1,6 +1,8 @@
 package andres.com.pruebaandroid;
 
+import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,7 @@ import java.util.ArrayList;
 
 import clases.App;
 
-class ListaApp extends BaseAdapter {
+public class GridApp extends BaseAdapter {
 
     private Context context;
     private ArrayList apps;
@@ -25,7 +27,7 @@ class ListaApp extends BaseAdapter {
     private ImageLoader imageLoader;
     private ViewHolder holder;
 
-    ListaApp(Context mainActivity, ArrayList arrayList) {
+    GridApp(Context mainActivity, ArrayList arrayList) {
         context = mainActivity;
         this.apps = arrayList;
         this.inflater = LayoutInflater.from(context);
@@ -42,13 +44,13 @@ class ListaApp extends BaseAdapter {
     }
 
     @Override
-    public App getItem(int position) {
-        return  (App) apps.get( position );
+    public Object getItem(int position) {
+        return null;
     }
 
     @Override
     public long getItemId(int position) {
-        return Long.valueOf(((App) apps.get( position )).id);
+        return 0;
     }
 
     private static class ViewHolder{
@@ -60,7 +62,7 @@ class ListaApp extends BaseAdapter {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
         if(view == null){
-            view = inflater.inflate(R.layout.lista_app, null);
+            view = inflater.inflate(R.layout.grid_app, null);
             holder = new ViewHolder();
             holder.tvAppName = (TextView) view.findViewById(R.id.tv_app_nombre);
             holder.ivAppLogo=(ImageView) view.findViewById(R.id.iv_app_logo);
@@ -78,14 +80,13 @@ class ListaApp extends BaseAdapter {
             imageLoader.displayImage(app.urlLogo, holder.ivAppLogo);
         }
 
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context, "Detalles App: "+ position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "Detalles App: "+ position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         return view;
     }
-
 }
