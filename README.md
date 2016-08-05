@@ -1,3 +1,3 @@
 ## Detalle
 
-Código de prueba para Gravility
+CÃ³digo de prueba para Grability
