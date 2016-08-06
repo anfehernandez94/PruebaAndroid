@@ -1,19 +1,13 @@
 package andres.com.pruebaandroid;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 
-import clases.App;
 
 public class GridCategoria extends BaseAdapter {
 
@@ -55,6 +49,8 @@ public class GridCategoria extends BaseAdapter {
             view = inflater.inflate(R.layout.grid_categoria, null);
             holder = new ViewHolder();
             holder.tvCategoriaNombre = (TextView) view.findViewById(R.id.tv_categoria_nombre_grid);
+            if(position%2 == 0)
+                view.setBackgroundResource(R.color.colorBackgroudDark);
             view.setTag( holder );
         }
         else {

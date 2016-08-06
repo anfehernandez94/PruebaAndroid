@@ -2,7 +2,9 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorBackgroud</item>
+        <item name="colorPrimaryDark">@color/colorBackgroudDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
     </style>
 
     <style name="TemaSplash" parent="android:Theme.Holo.Light.DarkActionBar">

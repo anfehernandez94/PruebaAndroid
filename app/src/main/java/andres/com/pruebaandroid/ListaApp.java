@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
@@ -63,6 +62,8 @@ class ListaApp extends BaseAdapter {
             view = inflater.inflate(R.layout.lista_app, null);
             holder = new ViewHolder();
             holder.tvAppName = (TextView) view.findViewById(R.id.tv_app_nombre);
+            if(position%2 == 0)
+                view.setBackgroundResource(R.color.colorBackgroudDark);
             holder.ivAppLogo=(ImageView) view.findViewById(R.id.iv_app_logo);
             view.setTag( holder );
         }
@@ -78,12 +79,6 @@ class ListaApp extends BaseAdapter {
             imageLoader.displayImage(app.urlLogo, holder.ivAppLogo);
         }
 
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Toast.makeText(context, "Detalles App: "+ position, Toast.LENGTH_SHORT).show();
-//            }
-//        });
 
         return view;
     }

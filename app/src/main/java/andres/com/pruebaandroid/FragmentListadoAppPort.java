@@ -10,9 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
@@ -24,8 +22,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 import clases.App;
-import clases.Constante;
-
 
 public class FragmentListadoAppPort extends Fragment {
 
@@ -50,12 +46,6 @@ public class FragmentListadoAppPort extends Fragment {
         DatabaseReference ref = database.getReference("feed/entry");
 
         final ListView lvAppCategoria = (ListView) view.findViewById(R.id.lv_app_categoria);
-        lvAppCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getActivity(), "Position :"+position+"  ListItem : "  , Toast.LENGTH_LONG).show();
-            }
-        });
 
         ref.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -66,8 +56,6 @@ public class FragmentListadoAppPort extends Fragment {
                 lvAppCategoria.setOnItemClickListener(new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-//                        App app = (App) parent.getAdapter().getItem(position);
-
                         Intent i = new Intent(getActivity(), ActivityApp.class);
                         i.putExtra("id", String.valueOf(id));
                         startActivity(i);
@@ -85,6 +73,7 @@ public class FragmentListadoAppPort extends Fragment {
                         arrayApp.add(app);
                     }
                 }
+
                 ListaApp adapter = new ListaApp(activity, arrayApp);
                 lvAppCategoria.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -93,7 +82,7 @@ public class FragmentListadoAppPort extends Fragment {
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Toast.makeText(getActivity(), databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "No se pudo descargar la información", Toast.LENGTH_SHORT).show();
             }
         });
 

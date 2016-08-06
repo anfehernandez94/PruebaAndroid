@@ -1,13 +1,10 @@
 package andres.com.pruebaandroid;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.widget.Toast;
 
-public class ActivityListadoCategoria extends Activity {
+public class ActivityListadoCategoria extends ActivityBase {
 
     private FragmentManager fragmentManager;
     private FragmentListadoCategoriaPort fragmentListadoCategoriaPort = new FragmentListadoCategoriaPort();
@@ -32,4 +29,5 @@ public class ActivityListadoCategoria extends Activity {
 
         fragmentTransaction.commit();
     }
+
 }

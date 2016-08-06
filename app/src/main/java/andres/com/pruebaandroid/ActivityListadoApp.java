@@ -1,11 +1,10 @@
 package andres.com.pruebaandroid;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
 import android.os.Bundle;
 
-public class ActivityListadoApp extends Activity {
+public class ActivityListadoApp extends ActivityBase {
 
     private FragmentManager fragmentManager;
     private FragmentListadoAppPort fragmentListadoAppPort = new FragmentListadoAppPort();
@@ -14,6 +13,7 @@ public class ActivityListadoApp extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.animation_translate_left2, R.anim.animation_empty);
         setContentView(R.layout.activity_listado_app);
 
         fragmentManager = getFragmentManager();
@@ -32,6 +32,5 @@ public class ActivityListadoApp extends Activity {
 
         fragmentTransaction.commit();
     }
-
 
 }

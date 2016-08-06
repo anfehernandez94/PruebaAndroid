@@ -1,8 +1,6 @@
 package andres.com.pruebaandroid;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,12 +43,12 @@ public class GridApp extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return null;
+        return  (App)apps.get( position );
     }
 
     @Override
     public long getItemId(int position) {
-        return 0;
+        return Long.valueOf(((App) apps.get( position )).id);
     }
 
     private static class ViewHolder{
@@ -65,6 +63,8 @@ public class GridApp extends BaseAdapter {
             view = inflater.inflate(R.layout.grid_app, null);
             holder = new ViewHolder();
             holder.tvAppName = (TextView) view.findViewById(R.id.tv_app_nombre);
+            if(position%2 == 0)
+                view.setBackgroundResource(R.color.colorBackgroudDark);
             holder.ivAppLogo=(ImageView) view.findViewById(R.id.iv_app_logo);
             view.setTag( holder );
         }
@@ -79,13 +79,6 @@ public class GridApp extends BaseAdapter {
         if(holder.ivAppLogo != null){
             imageLoader.displayImage(app.urlLogo, holder.ivAppLogo);
         }
-
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(context, "Detalles App: "+ position, Toast.LENGTH_SHORT).show();
-            }
-        });
 
         return view;
     }

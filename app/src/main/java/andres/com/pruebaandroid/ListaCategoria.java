@@ -7,11 +7,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import clases.App;
 
 class ListaCategoria extends BaseAdapter {
 
@@ -52,6 +50,8 @@ class ListaCategoria extends BaseAdapter {
             view = inflater.inflate(R.layout.lista_categoria, null);
             holder = new ViewHolder();
             holder.tvCategoriaNombre = (TextView) view.findViewById(R.id.tv_categoria_nombre_lista);
+            if(position%2 == 0)
+                view.setBackgroundResource(R.color.colorBackgroudDark);
             view.setTag( holder );
         }
         else {

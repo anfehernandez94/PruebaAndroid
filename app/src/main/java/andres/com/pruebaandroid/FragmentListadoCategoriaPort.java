@@ -14,7 +14,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.RuntimeExecutionException;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,8 +21,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-
-import clases.Constante;
 
 
 public class FragmentListadoCategoriaPort extends Fragment {
@@ -47,7 +44,9 @@ public class FragmentListadoCategoriaPort extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         try{
             database.setPersistenceEnabled(true);
-        }catch (RuntimeException e){}
+        }catch (RuntimeException e){
+            Toast.makeText(getActivity(), "No se pudo almacenar la información", Toast.LENGTH_SHORT).show();
+        }
 
         DatabaseReference ref = database.getReference("feed/entry");
 
@@ -80,6 +79,7 @@ public class FragmentListadoCategoriaPort extends Fragment {
                     if(estaRepetido)
                         arrayCategoria.add(categoria);
                 }
+                ((ActivityBase)getActivity()).ordenar(arrayCategoria);
                 ListaCategoria adapter = new ListaCategoria(activity, arrayCategoria);
                 lvAppCategoria.setAdapter(adapter);
                 adapter.notifyDataSetChanged();
@@ -94,5 +94,7 @@ public class FragmentListadoCategoriaPort extends Fragment {
 
         return view;
     }
+
+
 
 }

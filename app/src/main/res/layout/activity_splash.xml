@@ -2,17 +2,29 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@drawable/style_splash"
+    android:background="@color/colorPrimaryDark"
     android:layout_gravity="center"
     android:id="@+id/lin_lay"
     android:gravity="center"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
 
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/splash"
-        android:background="@drawable/ic_mood_black_24dp"
+        android:id="@+id/ivSplash1"
+        android:background="@drawable/ic_skull"
+        android:contentDescription="@string/sin_logo"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivSplash2"
+        android:background="@drawable/ic_love"
+        android:contentDescription="@string/sin_logo"/>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ivSplash3"
+        android:background="@drawable/ic_skull"
         android:contentDescription="@string/sin_logo"/>
 
 </LinearLayout>

@@ -11,7 +11,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -27,9 +26,7 @@ public class FragmentListadoCategoriaLand extends Fragment {
 
     View view;
 
-
     public FragmentListadoCategoriaLand() {
-        // Required empty public constructor
     }
 
     @Override
@@ -45,7 +42,9 @@ public class FragmentListadoCategoriaLand extends Fragment {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         try{
             database.setPersistenceEnabled(true);
-        }catch (RuntimeException e){}
+        }catch (RuntimeException e){
+            Toast.makeText(getActivity(), "No se pudo almacenar la información", Toast.LENGTH_SHORT).show();
+        }
 
         DatabaseReference ref = database.getReference("feed/entry");
 
@@ -80,6 +79,7 @@ public class FragmentListadoCategoriaLand extends Fragment {
                     if(estaRepetido)
                         arrayCategoria.add(categoria);
                 }
+                ((ActivityBase)getActivity()).ordenar(arrayCategoria);
                 GridCategoria adapter = new GridCategoria(activity, arrayCategoria);
                 gvAppCategoria.setAdapter(adapter);
                 adapter.notifyDataSetChanged();

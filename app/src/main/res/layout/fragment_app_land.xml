@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_app"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="andres.com.pruebaandroid.ActivityApp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_weight="1">
+            <TableRow  android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_app_categoria"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:text="@string/app_categoria"
+                    android:textSize="22sp"
+                    android:paddingTop="5dp"
+                    android:paddingLeft="20dp"
+                    android:paddingBottom="5dp"
+                    android:paddingRight="5dp"
+                    android:background="@drawable/borde_layout_land"
+                    />
+
+            </TableRow>
+
+            <ImageView
+                android:id="@+id/iv_app_logo"
+                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:contentDescription="@string/descripcion_app_logo"
+                android:src="@mipmap/ic_launcher"
+                android:background="@drawable/border_image_port"
+
+                />
+
+            <TextView
+                android:id="@+id/tv_app_nombre"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="32sp"
+                android:text="@string/app_sin_nombre"
+                android:minLines="1"
+                android:maxLines="3"
+                />
+            <TextView
+                android:id="@+id/tv_app_empresa"
+                android:layout_gravity="center"
+                android:gravity="center|top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="24sp"
+                android:text="@string/app_sin_nombre"
+                android:minLines="1"
+                android:maxLines="3"
+                />
+
+        <TextView
+            android:id="@+id/tv_app_releaseDate"
+            android:layout_gravity="center"
+            android:gravity="center|bottom"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginTop="5dp"
+            android:text="@string/app_sin_nombre"
+            android:minLines="1"
+            android:maxLines="3"
+            />
+
+        <TextView
+            android:id="@+id/tv_app_rights"
+            android:layout_gravity="center"
+            android:gravity="center|top"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_marginBottom="5dp"
+            android:text="@string/app_sin_nombre"
+            android:minLines="1"
+            android:maxLines="3"
+            />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:background="@color/colorPrimaryDark"
+        android:layout_weight="2">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_app_summary"
+                android:layout_gravity="left"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20sp"
+                android:layout_marginTop="5dp"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="15dp"
+                android:text="@string/app_sin_nombre"
+                android:ellipsize="end"
+                android:scrollHorizontally="true"
+                android:minLines="1"
+                android:maxLines="15"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"
+                android:background="@color/colorPrimaryTransparent"
+                android:clickable="true"
+                />
+
+            <TableRow android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="center"
+                android:paddingTop="15dp"
+                android:paddingBottom="15dp">
+                <TextView
+                    android:id="@+id/tv_app_amount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    />
+                <TextView
+                    android:id="@+id/tv_app_currency"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:layout_marginLeft="5dp"
+                    />
+                <Button
+                    android:id="@+id/btn_app_buy"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="22sp"
+                    android:layout_marginLeft="5dp"
+                    android:text="@string/comprar"
+                    />
+            </TableRow>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+</LinearLayout>
